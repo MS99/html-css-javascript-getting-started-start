@@ -5,10 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pies | Bertany's Pie Shop</title>
     <link href="site.css" rel="stylesheet" type="text/css">
-    
+    <style>
+        .item-quantity {
+            display: flex;            
+        }
+        
+        .quantity {
+            flex: 1;
+        }
+
+        .selectors {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
-    <header class="up">
+    <header>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
@@ -27,9 +39,20 @@
                     <img src="/images/apple-pie.png" alt="apple-pie">
                     <div class="columns">
                         <div class="title">Apple Pie</div>  
-                        <div class="price">$12.95</div>               
+                        <div class="price">$12.95</div>
                     </div>
                     <p class="desc">Our famous apple pie</p>
+                    <div class="item-quantity">
+                        <div class="quantity">Qty</div>
+                        <div class="selectors">
+                            <select name="quantity" id="quantity">
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>
+                                <option value="4"> 4 </option>
+                            </select>
+                        </div>
+                    </div>
                     <button data-order="apple-pie">Order</button>
                 </div>             
                 
@@ -37,9 +60,20 @@
                     <img src="/images/cherry-pie.png" alt="cherry-pie" class="cherry">
                     <div class="columns">
                         <div class="title">Cherry Pie</div>
-                        <div class="price">$15.95</div>   
-                    </div>  
+                        <div class="price">$15.95</div>
+                    </div>
                     <p class="desc">A summer classic!</p>
+                    <div class="item-quantity">
+                        <div class="quantity">Qty</div>
+                        <div class="selectors">
+                            <select name="quantity" id="quantity">
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>
+                                <option value="4"> 4 </option>
+                            </select>
+                        </div>
+                    </div>
                     <button data-order="cherry-pie">Order</button>
                 </div>                 
             </section>   
