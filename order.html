@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order | Bertany's Pie Shop</title>
+    <link href="site.css" rel="stylesheet" type="text/css">
+    <style>
+
+        @media only screen and (min-width: 768px){
+            article {
+                width: 350px;
+            }
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="reset"] {
+            background: transparent;
+            border: 0;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            border: solid 1px #999;
+            border-radius: 3px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="up">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pies.html">Pies</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <aside><img src="/images/logo.png" alt="Bertany's Pie Shop"></aside>
+        <article>
+            <h1>Order</h1>
+
+            <div class="pie">
+                <img src="" />
+                <div class="columns">
+                    <div class="title"></div>
+                    <div class="price"></div>
+                </div>
+                <p class="desc"></p>
+            </div>
+            <form action="http://localhost:8080" method="POST">
+                <input type="hidden" id="pie-order" name="pie-order">
+                <input type="hidden" id="location" name="location">
+
+                <div class="input-group">
+                    <div><label for="first-name">First name</label></div>
+                    <div><input type="text" id="first-name" name="first-name" placeholder="Enter your first name"></label></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="last-name">Last name</label></div>
+                    <div><input type="text" id="last-name" name="last-name" placeholder="Enter your last name"></label></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="address">Home Address</label></div>
+                    <div><input type="text" id="address" name="address" placeholder="Enter your Home address"></label></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="state">State</label></div>
+                    <div>
+                        <select name="state" id="state">
+                            <option value="" selected> [ Select One ] </option>
+                            <option value="Abia"> ABIA </option>
+                            <option value="Adamawa"> ADAMAWA </option>
+                            <option value="Akwa-Ibom"> AKWA IBOM </option>
+                            <option value="Anambra"> ANAMBRA </option>
+                            <option value="Bauchi"> BAUCHI </option>
+                            <option value="Bayelsa"> BAYELSA </option>
+                            <option value="Benue"> BENUE </option>
+                            <option value="Borno"> BORNO </option>
+                            <option value="Cross-River"> CROSS RIVER </option>
+                            <option value="Delta"> DELTA </option>
+                            <option value="Ebonyi"> EBONYI </option>
+                            <option value="Edo"> EDO </option>
+                            <option value="Ekiti"> EKITI </option>
+                            <option value="Enugu"> ENUGU </option>
+                            <option value="Gombe"> GOMBE </option>
+                            <option value="Jigawa"> JIGAWA </option>
+                            <option value="Katsina"> KATSINA </option>
+                            <option value="Kebbi"> KEBBI </option>
+                            <option value="Kogi"> KOGI </option>
+                            <option value="Kwara"> KWARA </option>
+                            <option value="Lagos"> LAGOS </option>
+                            <option value="Niger"> NIGER </option>
+                            <option value="Ogun"> OGUN </option>
+                            <option value="Osun"> OSUN </option>
+                            <option value="Oyo"> OYO </option>
+                            <option value="Plateau"> PLATEAU </option>
+                            <option value="Rivers"> RIVERS </option>
+                            <option value="Sokoto"> SOKOTO </option>
+                            <option value="Taraba"> TARABA </option>
+                            <option value="Yobe"> YOBE </option>
+                            <option value="FCT"> FCT </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="postal-code">Postal Code</label></div>
+                    <div><input type="text" id="postal-code" name="postal-code" placeholder="Enter your Postal Code"></label></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="comments">Comments</label></div>
+                    <div>
+                        <textarea
+                            name="comments"
+                            id="comments"
+                            cols="30"
+                            rows="10"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <input type="reset" value="Reset"/>
+                <input type="submit" value="Order"/>
+            </form>
+        </article>
+    </main>
+    <footer class="foot">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pies.html">Pies</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>    
+</body>
+
+<script>
+    window.addEventListener("DOMContentLoaded", function(e){
+
+        const order = localStorage.getItem("order");
+
+        /* Get location of User making Order for the Pies */
+        let locationBox = document.querySelector("#location");
+
+        let location = {
+            latitude = "unknown",
+            longitude = "unknown"
+        }
+        
+        window.navigator.geolocation.getCurrentPosition({
+            function (position){
+                location = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                }
+
+                locationBox.value = JSON.stringify(location);
+            },
+
+            function (error) {
+                locationBox.value = JSON.stringify(location);
+            }
+        });
+
+
+        if (order) {
+            const pieOrder = JSON.parse(order);
+
+            const orderInput = document.querySelector("#pie-order");
+            orderInput.value = order;
+
+            const pie = document.querySelector(".pie");
+
+            const title = pie.querySelector(".title");
+            const price = pie.querySelector(".price");
+            const desc = pie.querySelector(".desc");
+
+            title.innerText = pieOrder.title;
+            price.innerText = pieOrder.price;
+            desc.innerText = pieOrder.desc;
+        }
+    });
+</script>
+</html>
